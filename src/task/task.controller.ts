@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common";
 import type { Task } from "generated/prisma/browser";
 import { TaskService } from "./task.service";
 
@@ -25,5 +25,10 @@ export class TaskController {
     @Delete(':id')
     async deleteTask(@Param('id') id: string ) {
         this.taskService.deleteTask(Number(id))
+    }
+
+    @Put(':id')
+    async updateTask(@Param('id') id: string, @Body() data: Task ) {
+        this.taskService.updateTask(Number(id), data)
     }
 }
